@@ -1,0 +1,8 @@
+// Code to generate
+// Display the data received on the frontend
+
+// Assuming you have received the data from the backend
+String data = "Hello, World!";
+
+// Displaying the data on the frontend
+System.out.println(data);
