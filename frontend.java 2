@@ -1,0 +1,22 @@
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class StockPollingSystem {
+    private static final int POLLING_INTERVAL = 1000; // 1 second
+
+    public static void main(String[] args) {
+        int n = 10; // Number of stocks to fetch
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // Fetch stock prices from backend
+                for (int i = 0; i < n; i++) {
+                    // Code to fetch stock price for each stock
+                    // ...
+                }
+            }
+        }, 0, POLLING_INTERVAL);
+    }
+}
