@@ -1,0 +1,27 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class StockPriceAPI {
+    private static final String FILE_PATH = "stock_prices.txt";
+
+    public static void main(String[] args) {
+        try {
+            String stockPrice = fetchStockPrice();
+            System.out.println("Stock Price: " + stockPrice);
+        } catch (IOException e) {
+            System.out.println("Error fetching stock price: " + e.getMessage());
+        }
+    }
+
+    public static String fetchStockPrice() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+        }
+        return sb.toString();
+    }
+}
