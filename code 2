@@ -1,0 +1,57 @@
+import java.util.Random;
+
+public class StockPriceUpdater {
+    public static void main(String[] args) {
+        // Define the stocks and their refresh intervals
+        Stock[] stocks = {
+            new Stock("AAPL", 5),
+            new Stock("GOOGL", 10),
+            new Stock("AMZN", 15),
+            new Stock("MSFT", 20)
+        };
+
+        // Start updating the stock prices
+        for (Stock stock : stocks) {
+            new Thread(() -> {
+                Random random = new Random();
+                while (true) {
+                    double newPrice = stock.getPrice() + random.nextDouble() * 10 - 5;
+                    stock.setPrice(newPrice);
+                    System.out.println(stock.getName() + ": $" + newPrice);
+                    try {
+                        Thread.sleep(stock.getRefreshInterval() * 1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+    }
+}
+
+class Stock {
+    private String name;
+    private double price;
+    private int refreshInterval;
+
+    public Stock(String name, int refreshInterval) {
+        this.name = name;
+        this.refreshInterval = refreshInterval;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getRefreshInterval() {
+        return refreshInterval;
+    }
+}
